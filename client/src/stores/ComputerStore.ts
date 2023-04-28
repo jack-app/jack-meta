@@ -31,10 +31,9 @@ export const computerSlice = createSlice({
   name: 'computer',
   initialState,
   reducers: {
-    openComputerDialog: (
-      state,
-      action: PayloadAction<{ computerId: string; myUserId: string }>
-    ) => {
+
+
+    openComputerDialog: (state, action: PayloadAction<{ computerId: string; myUserId: string }> ) => {
       if (!state.shareScreenManager) {
         state.shareScreenManager = new ShareScreenManager(action.payload.myUserId)
       }
@@ -58,6 +57,8 @@ export const computerSlice = createSlice({
       state.computerId = null
       state.peerStreams.clear()
     },
+
+    
     setMyStream: (state, action: PayloadAction<null | MediaStream>) => {
       state.myStream = action.payload
     },
