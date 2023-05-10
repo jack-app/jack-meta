@@ -215,6 +215,7 @@ export default class Game extends Phaser.Scene {
     // set selected item and set up new dialog
     playerSelector.selectedItem = selectionItem
     selectionItem.onEnteredVoiceChatArea(this.myPlayer)
+    selectionItem.makeCall(this.myPlayer, this.otherPlayerMap, this.network?.webRTC)
     selectionItem.onOverlapDialog()
   }
 
@@ -283,7 +284,7 @@ export default class Game extends Phaser.Scene {
   }
 
   private handlePlayersOverlap(myPlayer, otherPlayer) {
-    otherPlayer.makeCall(myPlayer, this.network?.webRTC)
+    // otherPlayer.makeCall(myPlayer, this.network?.webRTC)
   }
 
   private handleItemUserAdded(playerId: string, itemId: string, itemType: ItemType) {

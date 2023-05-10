@@ -4,6 +4,8 @@ import Item from './Item'
 import Network from '../services/Network'
 import { openComputerDialog } from '../stores/ComputerStore'
 import Player from '../characters/Player'
+import OtherPlayer from '../characters/OtherPlayer'
+import WebRTC from '../web/WebRTC'
 
 export default class VoiceChatArea extends Item {
   id?: string
@@ -37,15 +39,37 @@ export default class VoiceChatArea extends Item {
   onEnteredVoiceChatArea(player: Player) {
     console.log('Entering voice chat area')
     this.addCurrentUser(player.playerId)
-    this.makeCall(player)
+    console.log(this.currentUsers)
   }
 
-  makeCall(newPlayer: Player) {
+  makeCall(newPlayer: Player, otherPlayerMap: Map<string, OtherPlayer>, webRTC: WebRTC) {
     //  newUserIdのユーザーを，すでにいるユーザー全員と通話開始させる
+    console.log(this.currentUsers)
     if (this.currentUsers.size >= 2) {
-      // TODO: 通話開始
-
-      // NOTE: Game.otherPlayers から自分以外のplayerを取得できそう
+      // 通話開始処理
+      // NOTE: うまくいかない
+      // currentUsersがユーザー間で同期されないのが原因のひとつ．
+      // どこかでサーバーとやり取りする必要がある?
+      // もしくは，client/src/stores/にファイル作って，そこでやりとりする必要がある?
+      const newPlayerId = newPlayer.playerId
+      console.log("new: " + newPlayerId)
+      for (const otherPlayerId of this.currentUsers) {
+        const otherPlayer = otherPlayerMap[otherPlayerId]
+        console.log("other: " + otherPlayerId)
+        if (
+          !otherPlayer.connected &&
+          otherPlayer.connectionBufferTime >= 750 &&
+          newPlayer.readyToConnect &&
+          otherPlayer.readyToConnect &&
+          newPlayerId > otherPlayer.playerId
+          ) {
+            console.log("connecting")
+            webRTC.connectToNewUser(otherPlayerId)
+            otherPlayer.connected = true
+            otherPlayer.connectionBufferTime = 0
+            console.log("connected!!")
+          }
+      }
     }
   }
 
