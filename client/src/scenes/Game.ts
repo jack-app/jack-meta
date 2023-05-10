@@ -150,8 +150,16 @@ export default class Game extends Phaser.Scene {
 
     this.physics.add.overlap(
       this.playerSelector,
-      [chairs, computers, whiteboards, voiceChatAreas,],
+      [chairs, computers, whiteboards,],
       this.handleItemSelectorOverlap,
+      undefined,
+      this
+    )
+
+    this.physics.add.overlap(
+      this.playerSelector,
+      [voiceChatAreas,],
+      this.handleVoiceChatAreaOverlap,
       undefined,
       this
     )
@@ -189,6 +197,24 @@ export default class Game extends Phaser.Scene {
 
     // set selected item and set up new dialog
     playerSelector.selectedItem = selectionItem
+    selectionItem.onOverlapDialog()
+  }
+
+  private handleVoiceChatAreaOverlap(playerSelector, selectionItem) {
+    const currentItem = playerSelector.selectedItem as Item
+    // currentItem is undefined if nothing was perviously selected
+    if (currentItem) {
+      // if the selection has not changed, do nothing
+      if (currentItem === selectionItem || currentItem.depth >= selectionItem.depth) {
+        return
+      }
+      // if selection changes, clear pervious dialog
+      if (this.myPlayer.playerBehavior !== PlayerBehavior.SITTING) currentItem.clearDialogBox()
+    }
+
+    // set selected item and set up new dialog
+    playerSelector.selectedItem = selectionItem
+    selectionItem.onEnteredVoiceChatArea()
     selectionItem.onOverlapDialog()
   }
 

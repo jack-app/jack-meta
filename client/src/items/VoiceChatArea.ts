@@ -33,6 +33,11 @@ export default class VoiceChatArea extends Item {
     }
   }
 
+  onEnteredVoiceChatArea() {
+    console.log('Entering voice chat area')
+    // TODO: 通話を開始する
+  }
+
   addCurrentUser(userId: string) {
     if (!this.currentUsers || this.currentUsers.has(userId)) return
     this.currentUsers.add(userId)
