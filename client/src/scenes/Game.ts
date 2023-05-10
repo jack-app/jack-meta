@@ -214,7 +214,7 @@ export default class Game extends Phaser.Scene {
 
     // set selected item and set up new dialog
     playerSelector.selectedItem = selectionItem
-    selectionItem.onEnteredVoiceChatArea()
+    selectionItem.onEnteredVoiceChatArea(this.myPlayer)
     selectionItem.onOverlapDialog()
   }
 
@@ -306,6 +306,9 @@ export default class Game extends Phaser.Scene {
     } else if (itemType === ItemType.WHITEBOARD) {
       const whiteboard = this.whiteboardMap.get(itemId)
       whiteboard?.removeCurrentUser(playerId)
+    } else if (itemType === ItemType.VOICECHATAREA) {
+      const voiceChatArea = this.voiceChatAreaMap.get(itemId)
+      voiceChatArea?.removeCurrentUser(playerId)
     }
   }
 
@@ -319,5 +322,9 @@ export default class Game extends Phaser.Scene {
       this.playerSelector.update(this.myPlayer, this.cursors)
       this.myPlayer.update(this.playerSelector, this.cursors, this.keyE, this.keyR, this.network)
     }
+
+    // TODO: 各VoiceChatAreaにplayerがoverlapしているか判定
+
+    // TODO: ↑でoverlapしていないplayerを，VoiceChatAreaからremove
   }
 }

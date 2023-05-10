@@ -3,6 +3,7 @@ import store from '../stores'
 import Item from './Item'
 import Network from '../services/Network'
 import { openComputerDialog } from '../stores/ComputerStore'
+import Player from '../characters/Player'
 
 export default class VoiceChatArea extends Item {
   id?: string
@@ -33,9 +34,19 @@ export default class VoiceChatArea extends Item {
     }
   }
 
-  onEnteredVoiceChatArea() {
+  onEnteredVoiceChatArea(player: Player) {
     console.log('Entering voice chat area')
-    // TODO: 通話を開始する
+    this.addCurrentUser(player.playerId)
+    this.makeCall(player)
+  }
+
+  makeCall(newPlayer: Player) {
+    //  newUserIdのユーザーを，すでにいるユーザー全員と通話開始させる
+    if (this.currentUsers.size >= 2) {
+      // TODO: 通話開始
+
+      // NOTE: Game.otherPlayers から自分以外のplayerを取得できそう
+    }
   }
 
   addCurrentUser(userId: string) {
