@@ -15,6 +15,7 @@ import { ItemType } from '../../../types/Items'
 import { NavKeys } from '../../../types/KeyboardState'
 import { JoystickMovement } from '../components/Joystick'
 import { openURL } from '../utils/helpers'
+import VoiceChatArea from '../items/VoiceChatArea'
 
 export default class MyPlayer extends Player {
   private playContainerBody: Phaser.Physics.Arcade.Body
@@ -64,6 +65,10 @@ export default class MyPlayer extends Player {
         case ItemType.COMPUTER:
           const computer = item as Computer
           computer.openDialog(this.playerId, network)
+          break
+        case ItemType.VOICECHATAREA:
+          const voiceChatArea = item as VoiceChatArea
+          voiceChatArea.openDialog(this.playerId, network)
           break
         case ItemType.WHITEBOARD:
           const whiteboard = item as Whiteboard

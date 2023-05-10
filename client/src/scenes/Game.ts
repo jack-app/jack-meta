@@ -150,7 +150,7 @@ export default class Game extends Phaser.Scene {
 
     this.physics.add.overlap(
       this.playerSelector,
-      [chairs, computers, whiteboards,],
+      [chairs, computers, whiteboards, voiceChatAreas,],
       this.handleItemSelectorOverlap,
       undefined,
       this
@@ -267,6 +267,9 @@ export default class Game extends Phaser.Scene {
     } else if (itemType === ItemType.WHITEBOARD) {
       const whiteboard = this.whiteboardMap.get(itemId)
       whiteboard?.addCurrentUser(playerId)
+    } else if (itemType === ItemType.VOICECHATAREA) {
+      const voiceChatArea = this.voiceChatAreaMap.get(itemId)
+      voiceChatArea?.addCurrentUser(playerId)
     }
   }
 

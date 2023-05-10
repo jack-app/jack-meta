@@ -46,6 +46,29 @@
         }, 
         {
          "draworder":"topdown",
+         "id":15,
+         "name":"VoiceChatArea",
+         "objects":[
+                {
+                 "gid":5489,
+                 "height":96,
+                 "id":1273,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":800,
+                 "y":640
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":3,
          "locked":true,
          "name":"Wall",
@@ -1111,29 +1134,6 @@
                  "width":32,
                  "x":544,
                  "y":328
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "id":15,
-         "name":"VoiceChatArea",
-         "objects":[
-                {
-                 "gid":5489,
-                 "height":96,
-                 "id":1273,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":128,
-                 "x":800,
-                 "y":640
                 }],
          "opacity":1,
          "type":"objectgroup",

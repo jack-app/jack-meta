@@ -12864,6 +12864,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,216,0,0,0,0,85,217,217,217,217,217,217,217,217,217,217,217,217,217,217,218
 </data>
  </layer>
+ <objectgroup id="15" name="VoiceChatArea">
+  <object id="1273" gid="5489" x="800" y="640" width="128" height="96"/>
+ </objectgroup>
  <objectgroup id="3" name="Wall" locked="1">
   <object id="134" gid="149" x="608" y="512" width="32" height="32"/>
   <object id="135" gid="930" x="576" y="512" width="32" height="32"/>
@@ -13070,9 +13073,6 @@
     <property name="direction" value="left"/>
    </properties>
   </object>
- </objectgroup>
- <objectgroup id="15" name="VoiceChatArea">
-  <object id="1273" gid="5489" x="800" y="640" width="128" height="96"/>
  </objectgroup>
  <objectgroup id="5" name="Objects">
   <object id="372" gid="2776" x="704" y="288" width="32" height="32"/>
