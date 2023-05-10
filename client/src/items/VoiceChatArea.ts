@@ -4,14 +4,14 @@ import Item from './Item'
 import Network from '../services/Network'
 import { openComputerDialog } from '../stores/ComputerStore'
 
-export default class Table extends Item {
+export default class VoiceChatArea extends Item {
   id?: string
   currentUsers = new Set<string>()
 
   constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame?: string | number) {
     super(scene, x, y, texture, frame)
 
-    this.itemType = ItemType.TABLE
+    this.itemType = ItemType.VOICECHATAREA
   }
 
   private updateStatus() {

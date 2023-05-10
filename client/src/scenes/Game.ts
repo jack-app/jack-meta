@@ -7,7 +7,7 @@ import Item from '../items/Item'
 import Chair from '../items/Chair'
 import Computer from '../items/Computer'
 import Whiteboard from '../items/Whiteboard'
-import Table from '../items/Table'
+import VoiceChatArea from '../items/VoiceChatArea'
 import '../characters/MyPlayer'
 import '../characters/OtherPlayer'
 import MyPlayer from '../characters/MyPlayer'
@@ -33,6 +33,7 @@ export default class Game extends Phaser.Scene {
   private otherPlayers!: Phaser.Physics.Arcade.Group
   private otherPlayerMap = new Map<string, OtherPlayer>()
   computerMap = new Map<string, Computer>()
+  voiceChatAreaMap = new Map<string, VoiceChatArea>()
   private whiteboardMap = new Map<string, Whiteboard>()
 
   constructor() {
@@ -104,6 +105,16 @@ export default class Game extends Phaser.Scene {
       const id = `${i}`
       item.id = id
       this.computerMap.set(id, item)
+    })
+
+    const voiceChatAreas = this.physics.add.staticGroup({ classType: VoiceChatArea })
+    const voiceChatAreaLayer = this.map.getObjectLayer('VoiceChatArea')
+    voiceChatAreaLayer.objects.forEach((obj, i) => {
+      const item = this.addObjectFromTiled(voiceChatAreas, obj, 'voiceChatAreas', 'voice_chat_area') as VoiceChatArea
+      item.setDepth(item.y + item.height * 0.27)
+      const id = `${i}`
+      item.id = id
+      this.voiceChatAreaMap.set(id, item)
     })
 
     // import whiteboards objects from Tiled map to Phaser
