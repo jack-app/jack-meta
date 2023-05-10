@@ -27,7 +27,7 @@ export default class VoiceChatArea extends Item {
 
   onOverlapDialog() {
     if (this.currentUsers.size === 0) {
-      this.setDialogBox('Press R to use computer')
+      this.setDialogBox('Press R to start screen sharing')
     } else {
       this.setDialogBox('Press R join')
     }
