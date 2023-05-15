@@ -2,7 +2,7 @@ import { ItemType } from '../../../types/Items'
 import store from '../stores'
 import Item from './Item'
 import Network from '../services/Network'
-import { openComputerDialog } from '../stores/ComputerStore'
+import { openVoiceChatAreaDialog } from '../stores/VoiceChatAreaStore'
 import Player from '../characters/Player'
 import OtherPlayer from '../characters/OtherPlayer'
 import WebRTC from '../web/WebRTC'
@@ -76,9 +76,9 @@ export default class VoiceChatArea extends Item {
   addCurrentUser(userId: string) {
     if (!this.currentUsers || this.currentUsers.has(userId)) return
     this.currentUsers.add(userId)
-    const computerState = store.getState().computer
-    if (computerState.computerId === this.id) {
-      computerState.shareScreenManager?.onUserJoined(userId)
+    const voiceChatAreaState = store.getState().voiceChatArea
+    if (voiceChatAreaState.voiceChatAreaId === this.id) {
+      voiceChatAreaState.shareScreenManager?.onUserJoined(userId)
     }
     this.updateStatus()
   }
@@ -86,16 +86,16 @@ export default class VoiceChatArea extends Item {
   removeCurrentUser(userId: string) {
     if (!this.currentUsers || !this.currentUsers.has(userId)) return
     this.currentUsers.delete(userId)
-    const computerState = store.getState().computer
-    if (computerState.computerId === this.id) {
-      computerState.shareScreenManager?.onUserLeft(userId)
+    const voiceChatAreaState = store.getState().voiceChatArea
+    if (voiceChatAreaState.voiceChatAreaId === this.id) {
+      voiceChatAreaState.shareScreenManager?.onUserLeft(userId)
     }
     this.updateStatus()
   }
 
   openDialog(playerId: string, network: Network) {
     if (!this.id) return
-    store.dispatch(openComputerDialog({ computerId: this.id, myUserId: playerId }))
-    network.connectToComputer(this.id)
+    store.dispatch(openVoiceChatAreaDialog({ voiceChatAreaId: this.id, myUserId: playerId }))
+    network.enterVoiceChatArea(this.id)
   }
 }

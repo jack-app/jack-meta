@@ -282,4 +282,12 @@ export default class Network {
   addChatMessage(content: string) {
     this.room?.send(Message.ADD_CHAT_MESSAGE, { content: content })
   }
+
+  enterVoiceChatArea(id: string) {
+    this.room?.send(Message.ENTER_VOICE_CHAT_AREA, { voiceChatAreaId: id })
+  }
+
+  leaveVoiceChatArea(id: string) {
+    this.room?.send(Message.LEAVE_VOICE_CHAT_AREA, { voiceChatAreaId: id })
+  }
 }
