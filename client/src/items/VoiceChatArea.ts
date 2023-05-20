@@ -94,8 +94,10 @@ export default class VoiceChatArea extends Item {
   }
 
   openDialog(playerId: string, network: Network) {
-    if (!this.id) return
-    store.dispatch(openVoiceChatAreaDialog({ voiceChatAreaId: this.id, myUserId: playerId }))
-    network.enterVoiceChatArea(this.id)
+    console.log("open dialog");
+    // よくわからなかったから，一旦コメントアウトしておく
+    // if (!this.id) return
+    // store.dispatch(openVoiceChatAreaDialog({ voiceChatAreaId: this.id, myUserId: playerId }))
+    // network.enterVoiceChatArea(this.id)
   }
 }

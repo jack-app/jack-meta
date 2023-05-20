@@ -206,7 +206,8 @@ export default class Game extends Phaser.Scene {
     if (currentItem) {
       // if the selection has not changed, do nothing
       if (currentItem === selectionItem || currentItem.depth >= selectionItem.depth) {
-        return
+        // よくわからんので無効化
+        // return
       }
       // if selection changes, clear pervious dialog
       if (this.myPlayer.playerBehavior !== PlayerBehavior.SITTING) currentItem.clearDialogBox()

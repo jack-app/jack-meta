@@ -1,5 +1,5 @@
 import { Client, Room } from 'colyseus.js'
-import { IComputer, IOfficeState, IPlayer, IWhiteboard } from '../../../types/IOfficeState'
+import { IComputer, IOfficeState, IPlayer, IVoiceChatArea, IWhiteboard } from '../../../types/IOfficeState'
 import { Message } from '../../../types/Messages'
 import { IRoomData, RoomType } from '../../../types/Rooms'
 import { ItemType } from '../../../types/Items'
@@ -135,6 +135,16 @@ export default class Network {
       }
       computer.connectedUser.onRemove = (item, index) => {
         phaserEvents.emit(Event.ITEM_USER_REMOVED, item, key, ItemType.COMPUTER)
+      }
+    }
+
+    this.room.state.voiceChatAreas.onAdd = (voiceChatArea: IVoiceChatArea, key: string) => {
+      // track changes on every child object's connectedUser
+      voiceChatArea.connectedUser.onAdd = (item, index) => {
+        phaserEvents.emit(Event.ITEM_USER_ADDED, item, key, ItemType.VOICECHATAREA)
+      }
+      voiceChatArea.connectedUser.onRemove = (item, index) => {
+        phaserEvents.emit(Event.ITEM_USER_REMOVED, item, key, ItemType.VOICECHATAREA)
       }
     }
 

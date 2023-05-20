@@ -10,7 +10,7 @@ type Payload = {
 export class VoiceChatAreaAddUserCommand extends Command<IOfficeState, Payload> {
   execute(data: Payload) {
     const { client, voiceChatAreaId } = data
-    const voiceChatArea = this.room.state.computers.get(voiceChatAreaId)
+    const voiceChatArea = this.room.state.voiceChatAreas.get(voiceChatAreaId)
     const clientId = client.sessionId
 
     if (!voiceChatArea || voiceChatArea.connectedUser.has(clientId)) return
