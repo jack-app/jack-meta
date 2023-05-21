@@ -37,25 +37,20 @@ export default class VoiceChatArea extends Item {
   }
 
   onEnteredVoiceChatArea(player: Player) {
-    console.log('Entering voice chat area')
     this.addCurrentUser(player.playerId)
-    console.log(this.currentUsers)
   }
 
-  makeCall(newPlayer: Player, otherPlayerMap: Map<string, OtherPlayer>, webRTC: WebRTC) {
+  makeCall(newPlayer: Player, otherPlayerMap: Map<string, OtherPlayer>, webRTC: WebRTC, network: Network) {
     //  newUserIdのユーザーを，すでにいるユーザー全員と通話開始させる
-    console.log(this.currentUsers)
+    if (!this.id) return
+    network.enterVoiceChatArea(this.id)
     if (this.currentUsers.size >= 2) {
       // 通話開始処理
-      // NOTE: うまくいかない
-      // currentUsersがユーザー間で同期されないのが原因のひとつ．
-      // どこかでサーバーとやり取りする必要がある?
-      // もしくは，client/src/stores/にファイル作って，そこでやりとりする必要がある?
       const newPlayerId = newPlayer.playerId
-      console.log("new: " + newPlayerId)
+      // console.log("new: " + newPlayerId)
       for (const otherPlayerId of this.currentUsers) {
         const otherPlayer = otherPlayerMap.get(otherPlayerId)
-        console.log("other: " + otherPlayerId)
+        // console.log("other: " + otherPlayerId)
         if (
           otherPlayer &&
           !otherPlayer.connected &&

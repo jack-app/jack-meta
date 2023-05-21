@@ -36,6 +36,9 @@ export default class Game extends Phaser.Scene {
   voiceChatAreaMap = new Map<string, VoiceChatArea>()
   private whiteboardMap = new Map<string, Whiteboard>()
 
+  isInVoiceChatArea = false
+  lastVoiceChatAreaId = "-1"
+
   constructor() {
     super('game')
   }
@@ -201,7 +204,7 @@ export default class Game extends Phaser.Scene {
   }
 
   private handleVoiceChatAreaOverlap(playerSelector, selectionItem) {
-    const currentItem = playerSelector.selectedItem as Item
+    const currentItem = playerSelector.selectedItem as VoiceChatArea
     // currentItem is undefined if nothing was perviously selected
     if (currentItem) {
       // if the selection has not changed, do nothing
@@ -216,8 +219,13 @@ export default class Game extends Phaser.Scene {
     // set selected item and set up new dialog
     playerSelector.selectedItem = selectionItem
     selectionItem.onEnteredVoiceChatArea(this.myPlayer)
-    selectionItem.makeCall(this.myPlayer, this.otherPlayerMap, this.network?.webRTC)
+    selectionItem.makeCall(this.myPlayer, this.otherPlayerMap, this.network?.webRTC, this.network)
     selectionItem.onOverlapDialog()
+    this.isInVoiceChatArea = true
+
+    if (currentItem) {
+      this.lastVoiceChatAreaId = currentItem.id!;
+    }
   }
 
   private addObjectFromTiled(
@@ -325,8 +333,12 @@ export default class Game extends Phaser.Scene {
       this.myPlayer.update(this.playerSelector, this.cursors, this.keyE, this.keyR, this.network)
     }
 
-    // TODO: 各VoiceChatAreaにplayerがoverlapしているか判定
+    // 各VoiceChatAreaにplayerがoverlapしているか判定
+    if (!this.isInVoiceChatArea) {
+      // ↑でoverlapしていないplayerを，VoiceChatAreaからremove
+      this.network.leaveVoiceChatArea(this.lastVoiceChatAreaId)
+    }
 
-    // TODO: ↑でoverlapしていないplayerを，VoiceChatAreaからremove
+    this.isInVoiceChatArea = false
   }
 }

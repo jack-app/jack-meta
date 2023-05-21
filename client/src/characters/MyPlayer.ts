@@ -66,10 +66,10 @@ export default class MyPlayer extends Player {
           const computer = item as Computer
           computer.openDialog(this.playerId, network)
           break
-        case ItemType.VOICECHATAREA:
-          const voiceChatArea = item as VoiceChatArea
-          voiceChatArea.openDialog(this.playerId, network)
-          break
+        // case ItemType.VOICECHATAREA:
+        //   const voiceChatArea = item as VoiceChatArea
+        //   voiceChatArea.openDialog(this.playerId, network)
+        //   break
         case ItemType.WHITEBOARD:
           const whiteboard = item as Whiteboard
           whiteboard.openDialog(network)

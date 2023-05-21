@@ -38,7 +38,6 @@ export const voiceChatAreaSlice = createSlice({
         state.shareScreenManager = new ShareScreenManager(action.payload.myUserId)
       }
       const game = phaserGame.scene.keys.game as Game
-      game.disableKeys()
       state.shareScreenManager.onOpen()
       state.voiceChatAreaDialogOpen = true
       state.voiceChatAreaId = action.payload.voiceChatAreaId
@@ -46,7 +45,6 @@ export const voiceChatAreaSlice = createSlice({
     closeVoiceChatAreaDialog: (state) => {
       // Tell server the voiceChatArea dialog is closed.
       const game = phaserGame.scene.keys.game as Game
-      game.enableKeys()
       game.network.leaveVoiceChatArea(state.voiceChatAreaId!)
       for (const { call } of state.peerStreams.values()) {
         call.close()

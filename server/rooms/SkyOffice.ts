@@ -102,6 +102,10 @@ export class SkyOffice extends Room<OfficeState> {
           }
         })
       })
+      this.dispatcher.dispatch(new VoiceChatAreaRemoveUserCommand(), {
+        client,
+        voiceChatAreaId: message.voiceChatAreaId,
+      })
     })
 
     // when a player connect to a whiteboard, add to the whiteboard connectedUser array
