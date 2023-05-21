@@ -54,9 +54,10 @@ export default class VoiceChatArea extends Item {
       const newPlayerId = newPlayer.playerId
       console.log("new: " + newPlayerId)
       for (const otherPlayerId of this.currentUsers) {
-        const otherPlayer = otherPlayerMap[otherPlayerId]
+        const otherPlayer = otherPlayerMap.get(otherPlayerId)
         console.log("other: " + otherPlayerId)
         if (
+          otherPlayer &&
           !otherPlayer.connected &&
           otherPlayer.connectionBufferTime >= 750 &&
           newPlayer.readyToConnect &&
@@ -96,8 +97,8 @@ export default class VoiceChatArea extends Item {
   openDialog(playerId: string, network: Network) {
     console.log("open dialog");
     // よくわからなかったから，一旦コメントアウトしておく
-    // if (!this.id) return
+    if (!this.id) return
     // store.dispatch(openVoiceChatAreaDialog({ voiceChatAreaId: this.id, myUserId: playerId }))
-    // network.enterVoiceChatArea(this.id)
+    network.enterVoiceChatArea(this.id)
   }
 }
