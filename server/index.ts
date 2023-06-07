@@ -4,6 +4,7 @@ import cors from 'cors'
 import { Server, LobbyRoom } from 'colyseus'
 import { monitor } from '@colyseus/monitor'
 import { RoomType } from '../types/Rooms'
+import { matchMaker } from 'colyseus'
 
 // import socialRoutes from "@colyseus/social/express"
 
@@ -30,6 +31,8 @@ gameServer.define(RoomType.PUBLIC, SkyOffice, {
   autoDispose: false,
 })
 gameServer.define(RoomType.CUSTOM, SkyOffice).enableRealtimeListing()
+matchMaker.createRoom(RoomType.CUSTOM, { name: "jack-meta", description: "", autoDispose: false });
+
 
 /**
  * Register @colyseus/social routes
@@ -44,3 +47,4 @@ app.use('/colyseus', monitor())
 
 gameServer.listen(port)
 console.log(`Listening on ws://localhost:${port}`)
+
