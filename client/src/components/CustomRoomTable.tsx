@@ -132,7 +132,7 @@ export const CustomRoomTable = () => {
               <TableCell></TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Description</TableCell>
-              <TableCell>ID</TableCell>
+              {/* <TableCell>ID</TableCell> */}
               <TableCell align="center">
                 <PeopleAltIcon />
               </TableCell>
@@ -156,7 +156,7 @@ export const CustomRoomTable = () => {
                   <TableCell>
                     <div className="description">{description}</div>
                   </TableCell>
-                  <TableCell>{roomId}</TableCell>
+                  {/* <TableCell>{roomId}</TableCell> */}
                   <TableCell align="center">{clients}</TableCell>
                   <TableCell align="center">
                     <Tooltip title={hasPassword ? 'Password required' : ''}>

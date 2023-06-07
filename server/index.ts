@@ -31,7 +31,11 @@ gameServer.define(RoomType.PUBLIC, SkyOffice, {
   autoDispose: false,
 })
 gameServer.define(RoomType.CUSTOM, SkyOffice).enableRealtimeListing()
-matchMaker.createRoom(RoomType.CUSTOM, { name: "jack-meta", description: "", autoDispose: false });
+matchMaker.createRoom(RoomType.CUSTOM, 
+  { name: "jack-meta",
+    description: "jackオンライン活動用",
+    autoDispose: false }
+  );
 
 
 /**

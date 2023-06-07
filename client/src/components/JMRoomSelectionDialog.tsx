@@ -102,22 +102,8 @@ const ProgressBar = styled(LinearProgress)`
 `
 
 export default function RoomSelectionDialog() {
-  const [showCustomRoom, setShowCustomRoom] = useState(true)
-  const [showCreateRoomForm, setShowCreateRoomForm] = useState(false)
   const [showSnackbar, setShowSnackbar] = useState(false)
   const lobbyJoined = useAppSelector((state) => state.room.lobbyJoined)
-
-  const handleConnect = () => {
-    if (lobbyJoined) {
-      const bootstrap = phaserGame.scene.keys.bootstrap as Bootstrap
-      bootstrap.network
-        .joinOrCreatePublic()
-        .then(() => bootstrap.launchGame())
-        .catch((error) => console.error(error))
-    } else {
-      setShowSnackbar(true)
-    }
-  }
 
   return (
     <>
@@ -140,60 +126,22 @@ export default function RoomSelectionDialog() {
       </Snackbar>
       <Backdrop>
         <Wrapper>
-          {
-          showCreateRoomForm ? (
-            <CustomRoomWrapper>
-              <TitleWrapper>
-                <IconButton className="back-button" onClick={() => setShowCreateRoomForm(false)}>
-                  <ArrowBackIcon />
-                </IconButton>
-                <Title>Create Custom Room</Title>
-              </TitleWrapper>
-              <CreateRoomForm />
-            </CustomRoomWrapper>
-          ) : 
-          showCustomRoom ? (
-            <CustomRoomWrapper>
-              <TitleWrapper>
-                {/* <IconButton className="back-button" onClick={() => setShowCustomRoom(false)}>
-                  <ArrowBackIcon />
-                </IconButton> */}
-                <Title>
-                  Custom Rooms
-                  <Tooltip
-                    title="We update the results in realtime, no refresh needed!"
-                    placement="top"
-                  >
-                    <IconButton>
-                      <HelpOutlineIcon className="tip" />
-                    </IconButton>
-                  </Tooltip>
-                </Title>
-              </TitleWrapper>
-              <CustomRoomTable />
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => setShowCreateRoomForm(true)}
-              >
-                Create new room
-              </Button>
-            </CustomRoomWrapper>
-          ) : (
-            <>
-              {/* <Title>Welcome to SkyOffice</Title>
-              <Content>
-                <img src={logo} alt="logo" />
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={() => (lobbyJoined ? setShowCustomRoom(true) : setShowSnackbar(true))}
+          <CustomRoomWrapper>
+            <TitleWrapper>
+              <Title>
+                Custom Rooms
+                <Tooltip
+                  title="We update the results in realtime, no refresh needed!"
+                  placement="top"
                 >
-                  Create/find custom rooms
-                </Button>
-              </Content> */}
-            </>
-          )}
+                  <IconButton>
+                    <HelpOutlineIcon className="tip" />
+                  </IconButton>
+                </Tooltip>
+              </Title>
+            </TitleWrapper>
+            <CustomRoomTable />
+          </CustomRoomWrapper>
         </Wrapper>
         {!lobbyJoined && (
           <ProgressBarWrapper>
