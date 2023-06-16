@@ -22,9 +22,9 @@ export default class VoiceChatArea extends Item {
     const numberOfUsers = this.currentUsers.size
     this.clearStatusBox()
     if (numberOfUsers === 1) {
-      this.setStatusBox(`${numberOfUsers} user`)
+      // this.setStatusBox(`${numberOfUsers} user`)
     } else if (numberOfUsers > 1) {
-      this.setStatusBox(`${numberOfUsers} users`)
+      // this.setStatusBox(`${numberOfUsers} users`)
     }
   }
 
