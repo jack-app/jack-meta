@@ -27,7 +27,7 @@
     "minimist": ">=1.2.2",
     "rimraf": "^2.7.1",
     "ts-node": "^8.1.0",
-    "ts-node-dev": "^1.0.0-pre.63"
+    "ts-node-dev": "^1.1.8"
   },
   "dependencies": {
     "@colyseus/command": "^0.1.7",
@@ -42,6 +42,7 @@
     "express": "^4.16.4",
     "phaser": "^3.55.2",
     "regenerator-runtime": "^0.13.7",
-    "typescript": "^4.8.2"
+    "typescript": "^4.8.2",
+    "vite": "^4.3.5"
   }
 }

@@ -73,6 +73,13 @@ export default class WebRTC {
         this.setUpButtons()
         store.dispatch(setVideoConnected(true))
         this.network.videoConnected()
+
+        //make first video turned off
+        const videoTrack = this.myStream.getVideoTracks()[0]
+        videoTrack.enabled = false
+
+        const audioTrack = this.myStream.getAudioTracks()[0]
+        audioTrack.enabled = false
       })
       .catch((error) => {
         if (alertOnError) window.alert('No webcam or microphone found, or permission is blocked')
@@ -133,30 +140,30 @@ export default class WebRTC {
   // method to set up mute/unmute and video on/off buttons
   setUpButtons() {
     const audioButton = document.createElement('button')
-    audioButton.innerText = 'Mute'
+    audioButton.innerText = 'ﾐｭｰﾄ解除'
     audioButton.addEventListener('click', () => {
       if (this.myStream) {
         const audioTrack = this.myStream.getAudioTracks()[0]
         if (audioTrack.enabled) {
           audioTrack.enabled = false
-          audioButton.innerText = 'Unmute'
+          audioButton.innerText = 'ﾐｭｰﾄ解除'
         } else {
           audioTrack.enabled = true
-          audioButton.innerText = 'Mute'
+          audioButton.innerText = 'ミュート'
         }
       }
     })
     const videoButton = document.createElement('button')
-    videoButton.innerText = 'Video off'
+    videoButton.innerText = 'ビデオオン'
     videoButton.addEventListener('click', () => {
       if (this.myStream) {
         const audioTrack = this.myStream.getVideoTracks()[0]
         if (audioTrack.enabled) {
           audioTrack.enabled = false
-          videoButton.innerText = 'Video on'
+          videoButton.innerText = 'ビデオオン'
         } else {
           audioTrack.enabled = true
-          videoButton.innerText = 'Video off'
+          videoButton.innerText = 'ビデオオフ'
         }
       }
     })
