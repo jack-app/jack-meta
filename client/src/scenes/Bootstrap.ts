@@ -40,6 +40,10 @@ export default class Bootstrap extends Phaser.Scene {
       frameWidth: 96,
       frameHeight: 64,
     })
+    this.load.spritesheet('voiceChatAreas', 'assets/items/VoiceChatArea.png', {
+      frameWidth: 128,
+      frameHeight: 96,
+    })
     this.load.spritesheet('whiteboards', 'assets/items/whiteboard.png', {
       frameWidth: 64,
       frameHeight: 64,

@@ -1,12 +1,4 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"map.json"
-        }
-    },
  "height":30,
  "infinite":false,
  "layers":[
@@ -43,6 +35,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 216, 0, 0, 0, 0, 85, 217, 217, 217, 217, 217, 217, 217, 217, 217, 217, 217, 217, 217, 217, 218],
          "height":30,
          "id":2,
+         "locked":true,
          "name":"Ground",
          "opacity":1,
          "type":"tilelayer",
@@ -53,7 +46,31 @@
         }, 
         {
          "draworder":"topdown",
+         "id":15,
+         "name":"VoiceChatArea",
+         "objects":[
+                {
+                 "gid":5489,
+                 "height":96,
+                 "id":1273,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":800,
+                 "y":640
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":3,
+         "locked":true,
          "name":"Wall",
          "objects":[
                 {
@@ -521,6 +538,7 @@
         {
          "draworder":"topdown",
          "id":4,
+         "locked":true,
          "name":"Chair",
          "objects":[
                 {
@@ -3592,7 +3610,7 @@
          "name":"GenericObjects",
          "objects":[
                 {
-                 "gid":4057,
+                 "gid":4130,
                  "height":32,
                  "id":707,
                  "name":"",
@@ -3604,7 +3622,7 @@
                  "y":64
                 }, 
                 {
-                 "gid":4058,
+                 "gid":4131,
                  "height":32,
                  "id":708,
                  "name":"",
@@ -3616,7 +3634,7 @@
                  "y":64
                 }, 
                 {
-                 "gid":4073,
+                 "gid":4146,
                  "height":32,
                  "id":709,
                  "name":"",
@@ -3628,7 +3646,7 @@
                  "y":96
                 }, 
                 {
-                 "gid":4074,
+                 "gid":4147,
                  "height":32,
                  "id":710,
                  "name":"",
@@ -3640,7 +3658,7 @@
                  "y":96
                 }, 
                 {
-                 "gid":4058,
+                 "gid":4131,
                  "height":32,
                  "id":711,
                  "name":"",
@@ -3652,7 +3670,7 @@
                  "y":288
                 }, 
                 {
-                 "gid":4057,
+                 "gid":4130,
                  "height":32,
                  "id":712,
                  "name":"",
@@ -3664,7 +3682,7 @@
                  "y":288
                 }, 
                 {
-                 "gid":4074,
+                 "gid":4147,
                  "height":32,
                  "id":713,
                  "name":"",
@@ -3676,7 +3694,7 @@
                  "y":320
                 }, 
                 {
-                 "gid":4073,
+                 "gid":4146,
                  "height":32,
                  "id":714,
                  "name":"",
@@ -3688,7 +3706,7 @@
                  "y":320
                 }, 
                 {
-                 "gid":4374,
+                 "gid":4447,
                  "height":32,
                  "id":715,
                  "name":"",
@@ -3700,7 +3718,7 @@
                  "y":96
                 }, 
                 {
-                 "gid":4387,
+                 "gid":4460,
                  "height":32,
                  "id":828,
                  "name":"",
@@ -3712,7 +3730,7 @@
                  "y":128
                 }, 
                 {
-                 "gid":3571,
+                 "gid":3644,
                  "height":32,
                  "id":833,
                  "name":"",
@@ -3724,7 +3742,7 @@
                  "y":160
                 }, 
                 {
-                 "gid":3587,
+                 "gid":3660,
                  "height":32,
                  "id":834,
                  "name":"",
@@ -3736,7 +3754,7 @@
                  "y":192
                 }, 
                 {
-                 "gid":3572,
+                 "gid":3645,
                  "height":32,
                  "id":835,
                  "name":"",
@@ -3748,7 +3766,7 @@
                  "y":160
                 }, 
                 {
-                 "gid":3588,
+                 "gid":3661,
                  "height":32,
                  "id":836,
                  "name":"",
@@ -3771,7 +3789,7 @@
          "name":"GenericObjectsOnCollide",
          "objects":[
                 {
-                 "gid":4390,
+                 "gid":4463,
                  "height":32,
                  "id":716,
                  "name":"",
@@ -3783,7 +3801,7 @@
                  "y":128
                 }, 
                 {
-                 "gid":4315,
+                 "gid":4388,
                  "height":32,
                  "id":826,
                  "name":"",
@@ -3795,7 +3813,7 @@
                  "y":896
                 }, 
                 {
-                 "gid":4331,
+                 "gid":4404,
                  "height":32,
                  "id":827,
                  "name":"",
@@ -3807,7 +3825,7 @@
                  "y":928
                 }, 
                 {
-                 "gid":4316,
+                 "gid":4389,
                  "height":32,
                  "id":838,
                  "name":"",
@@ -3819,7 +3837,7 @@
                  "y":928
                 }, 
                 {
-                 "gid":4332,
+                 "gid":4405,
                  "height":32,
                  "id":839,
                  "name":"",
@@ -3839,10 +3857,11 @@
         {
          "draworder":"topdown",
          "id":9,
+         "locked":true,
          "name":"Computer",
          "objects":[
                 {
-                 "gid":4391,
+                 "gid":4680,
                  "height":64,
                  "id":875,
                  "name":"",
@@ -3854,7 +3873,7 @@
                  "y":544
                 }, 
                 {
-                 "gid":4393,
+                 "gid":4682,
                  "height":64,
                  "id":876,
                  "name":"",
@@ -3866,7 +3885,7 @@
                  "y":544
                 }, 
                 {
-                 "gid":4395,
+                 "gid":4684,
                  "height":64,
                  "id":877,
                  "name":"",
@@ -3878,7 +3897,7 @@
                  "y":544
                 }, 
                 {
-                 "gid":4392,
+                 "gid":4681,
                  "height":64,
                  "id":878,
                  "name":"",
@@ -3890,7 +3909,7 @@
                  "y":800
                 }, 
                 {
-                 "gid":4394,
+                 "gid":4683,
                  "height":64,
                  "id":879,
                  "name":"",
@@ -3913,7 +3932,7 @@
          "name":"Whiteboard",
          "objects":[
                 {
-                 "gid":4396,
+                 "gid":4685,
                  "height":64,
                  "id":880,
                  "name":"",
@@ -3925,7 +3944,7 @@
                  "y":320
                 }, 
                 {
-                 "gid":4397,
+                 "gid":4686,
                  "height":64,
                  "id":881,
                  "name":"",
@@ -3937,7 +3956,7 @@
                  "y":96
                 }, 
                 {
-                 "gid":4398,
+                 "gid":4687,
                  "height":64,
                  "id":1263,
                  "name":"",
@@ -3960,7 +3979,7 @@
          "name":"Basement",
          "objects":[
                 {
-                 "gid":4748,
+                 "gid":5037,
                  "height":32,
                  "id":1192,
                  "name":"",
@@ -3972,7 +3991,7 @@
                  "y":256
                 }, 
                 {
-                 "gid":4766,
+                 "gid":5055,
                  "height":32,
                  "id":1194,
                  "name":"",
@@ -3984,7 +4003,7 @@
                  "y":288
                 }, 
                 {
-                 "gid":4764,
+                 "gid":5053,
                  "height":32,
                  "id":1195,
                  "name":"",
@@ -3996,7 +4015,7 @@
                  "y":320
                 }, 
                 {
-                 "gid":4765,
+                 "gid":5054,
                  "height":32,
                  "id":1196,
                  "name":"",
@@ -4008,7 +4027,7 @@
                  "y":320
                 }, 
                 {
-                 "gid":4750,
+                 "gid":5039,
                  "height":32,
                  "id":1198,
                  "name":"",
@@ -4020,7 +4039,7 @@
                  "y":288
                 }, 
                 {
-                 "gid":4749,
+                 "gid":5038,
                  "height":32,
                  "id":1199,
                  "name":"",
@@ -4032,7 +4051,7 @@
                  "y":256
                 }, 
                 {
-                 "gid":4772,
+                 "gid":5061,
                  "height":32,
                  "id":1214,
                  "name":"",
@@ -4044,7 +4063,7 @@
                  "y":256
                 }, 
                 {
-                 "gid":4773,
+                 "gid":5062,
                  "height":32,
                  "id":1215,
                  "name":"",
@@ -4056,7 +4075,7 @@
                  "y":256
                 }, 
                 {
-                 "gid":4788,
+                 "gid":5077,
                  "height":32,
                  "id":1216,
                  "name":"",
@@ -4068,7 +4087,7 @@
                  "y":288
                 }, 
                 {
-                 "gid":4789,
+                 "gid":5078,
                  "height":32,
                  "id":1217,
                  "name":"",
@@ -4080,7 +4099,7 @@
                  "y":288
                 }, 
                 {
-                 "gid":4803,
+                 "gid":5092,
                  "height":32,
                  "id":1230,
                  "name":"",
@@ -4092,7 +4111,7 @@
                  "y":257
                 }, 
                 {
-                 "gid":4804,
+                 "gid":5093,
                  "height":32,
                  "id":1231,
                  "name":"",
@@ -4104,7 +4123,7 @@
                  "y":257
                 }, 
                 {
-                 "gid":4805,
+                 "gid":5094,
                  "height":32,
                  "id":1232,
                  "name":"",
@@ -4116,7 +4135,7 @@
                  "y":257
                 }, 
                 {
-                 "gid":4806,
+                 "gid":5095,
                  "height":32,
                  "id":1233,
                  "name":"",
@@ -4128,7 +4147,7 @@
                  "y":257
                 }, 
                 {
-                 "gid":4822,
+                 "gid":5111,
                  "height":32,
                  "id":1234,
                  "name":"",
@@ -4140,7 +4159,7 @@
                  "y":289
                 }, 
                 {
-                 "gid":4821,
+                 "gid":5110,
                  "height":32,
                  "id":1235,
                  "name":"",
@@ -4152,7 +4171,7 @@
                  "y":289
                 }, 
                 {
-                 "gid":4820,
+                 "gid":5109,
                  "height":32,
                  "id":1236,
                  "name":"",
@@ -4164,7 +4183,7 @@
                  "y":289
                 }, 
                 {
-                 "gid":4819,
+                 "gid":5108,
                  "height":32,
                  "id":1237,
                  "name":"",
@@ -4176,7 +4195,7 @@
                  "y":289
                 }, 
                 {
-                 "gid":4835,
+                 "gid":5124,
                  "height":32,
                  "id":1238,
                  "name":"",
@@ -4188,7 +4207,7 @@
                  "y":321
                 }, 
                 {
-                 "gid":4836,
+                 "gid":5125,
                  "height":32,
                  "id":1239,
                  "name":"",
@@ -4200,7 +4219,7 @@
                  "y":321
                 }, 
                 {
-                 "gid":4837,
+                 "gid":5126,
                  "height":32,
                  "id":1240,
                  "name":"",
@@ -4212,7 +4231,7 @@
                  "y":321
                 }, 
                 {
-                 "gid":4838,
+                 "gid":5127,
                  "height":32,
                  "id":1241,
                  "name":"",
@@ -4224,7 +4243,7 @@
                  "y":321
                 }, 
                 {
-                 "gid":4816,
+                 "gid":5105,
                  "height":32,
                  "id":1242,
                  "name":"",
@@ -4241,8 +4260,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":15,
- "nextobjectid":1271,
+ "nextlayerid":16,
+ "nextobjectid":1274,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",
@@ -27381,32 +27400,32 @@
         {
          "columns":16,
          "firstgid":2584,
-         "image":"..\/items\/Modern_Office_Black_Shadow.png",
+         "image":"..\/tileset\/Modern_Office_Black_Shadow.png",
          "imageheight":1696,
          "imagewidth":512,
          "margin":0,
          "name":"Modern_Office_Black_Shadow",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":848,
          "tileheight":32,
          "tilewidth":32
         }, 
         {
          "columns":16,
-         "firstgid":3359,
-         "image":"..\/items\/Generic.png",
+         "firstgid":3432,
+         "image":"..\/tileset\/Generic.png",
          "imageheight":2496,
          "imagewidth":512,
          "margin":0,
          "name":"Generic",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":1248,
          "tileheight":32,
          "tilewidth":32
         }, 
         {
          "columns":5,
-         "firstgid":4391,
+         "firstgid":4680,
          "image":"..\/items\/computer.png",
          "imageheight":64,
          "imagewidth":480,
@@ -27419,7 +27438,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":4396,
+         "firstgid":4685,
          "image":"..\/items\/whiteboard.png",
          "imageheight":192,
          "imagewidth":64,
@@ -27432,20 +27451,20 @@
         }, 
         {
          "columns":16,
-         "firstgid":4399,
-         "image":"..\/items\/Basement.png",
+         "firstgid":4688,
+         "image":"..\/tileset\/Basement.png",
          "imageheight":1600,
          "imagewidth":512,
          "margin":0,
          "name":"Basement",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":800,
          "tileheight":32,
          "tilewidth":32
         }, 
         {
          "columns":1,
-         "firstgid":4839,
+         "firstgid":5488,
          "image":"..\/items\/vendingmachine.png",
          "imageheight":72,
          "imagewidth":48,
@@ -27455,6 +27474,19 @@
          "tilecount":1,
          "tileheight":72,
          "tilewidth":48
+        }, 
+        {
+         "columns":1,
+         "firstgid":5489,
+         "image":"..\/items\/VoiceChatArea.png",
+         "imageheight":96,
+         "imagewidth":128,
+         "margin":0,
+         "name":"voice_chat_area",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":96,
+         "tilewidth":128
         }],
  "tilewidth":32,
  "type":"map",

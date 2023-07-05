@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import { Room, Client, ServerError } from 'colyseus'
 import { Dispatcher } from '@colyseus/command'
-import { Player, OfficeState, Computer, Whiteboard } from './schema/OfficeState'
+import { Player, OfficeState, Computer, Whiteboard, VoiceChatArea } from './schema/OfficeState'
 import { Message } from '../../types/Messages'
 import { IRoomData } from '../../types/Rooms'
 import { whiteboardRoomIds } from './schema/OfficeState'
@@ -11,6 +11,10 @@ import {
   ComputerAddUserCommand,
   ComputerRemoveUserCommand,
 } from './commands/ComputerUpdateArrayCommand'
+import {
+  VoiceChatAreaAddUserCommand,
+  VoiceChatAreaRemoveUserCommand,
+} from './commands/VocieChatAreaUpdateArrayCommand'
 import {
   WhiteboardAddUserCommand,
   WhiteboardRemoveUserCommand,
@@ -49,6 +53,11 @@ export class SkyOffice extends Room<OfficeState> {
       this.state.whiteboards.set(String(i), new Whiteboard())
     }
 
+    // HARD-CODED
+    for (let i = 0; i < 1; i++) {
+      this.state.voiceChatAreas.set(String(i), new VoiceChatArea())
+    }
+
     // when a player connect to a computer, add to the computer connectedUser array
     this.onMessage(Message.CONNECT_TO_COMPUTER, (client, message: { computerId: string }) => {
       this.dispatcher.dispatch(new ComputerAddUserCommand(), {
@@ -74,6 +83,28 @@ export class SkyOffice extends Room<OfficeState> {
             cli.send(Message.STOP_SCREEN_SHARE, client.sessionId)
           }
         })
+      })
+    })
+
+    this.onMessage(Message.ENTER_VOICE_CHAT_AREA, (client, message: { voiceChatAreaId: string}) => {
+      this.dispatcher.dispatch(new VoiceChatAreaAddUserCommand(), {
+        client,
+        voiceChatAreaId: message.voiceChatAreaId,
+      })
+    })
+
+    this.onMessage(Message.LEAVE_VOICE_CHAT_AREA, (client, message: { voiceChatAreaId: string}) => {
+      const voiceChatArea = this.state.voiceChatAreas.get(message.voiceChatAreaId)
+      voiceChatArea?.connectedUser.forEach((id) => {
+        this.clients.forEach((cli) => {
+          if (cli.sessionId === id && cli.sessionId !== client.sessionId) {
+            cli.send(Message.LEAVE_VOICE_CHAT_AREA, client.sessionId)
+          }
+        })
+      })
+      this.dispatcher.dispatch(new VoiceChatAreaRemoveUserCommand(), {
+        client,
+        voiceChatAreaId: message.voiceChatAreaId,
       })
     })
 

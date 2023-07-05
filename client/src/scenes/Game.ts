@@ -7,7 +7,7 @@ import Item from '../items/Item'
 import Chair from '../items/Chair'
 import Computer from '../items/Computer'
 import Whiteboard from '../items/Whiteboard'
-import Table from '../items/Table'
+import VoiceChatArea from '../items/VoiceChatArea'
 import '../characters/MyPlayer'
 import '../characters/OtherPlayer'
 import MyPlayer from '../characters/MyPlayer'
@@ -33,7 +33,11 @@ export default class Game extends Phaser.Scene {
   private otherPlayers!: Phaser.Physics.Arcade.Group
   private otherPlayerMap = new Map<string, OtherPlayer>()
   computerMap = new Map<string, Computer>()
+  voiceChatAreaMap = new Map<string, VoiceChatArea>()
   private whiteboardMap = new Map<string, Whiteboard>()
+
+  isInVoiceChatArea = false
+  lastVoiceChatAreaId = "-1"
 
   constructor() {
     super('game')
@@ -106,6 +110,16 @@ export default class Game extends Phaser.Scene {
       this.computerMap.set(id, item)
     })
 
+    const voiceChatAreas = this.physics.add.staticGroup({ classType: VoiceChatArea })
+    const voiceChatAreaLayer = this.map.getObjectLayer('VoiceChatArea')
+    voiceChatAreaLayer.objects.forEach((obj, i) => {
+      const item = this.addObjectFromTiled(voiceChatAreas, obj, 'voiceChatAreas', 'voice_chat_area') as VoiceChatArea
+      item.setDepth(item.y + item.height * 0.27)
+      const id = `${i}`
+      item.id = id
+      this.voiceChatAreaMap.set(id, item)
+    })
+
     // import whiteboards objects from Tiled map to Phaser
     const whiteboards = this.physics.add.staticGroup({ classType: Whiteboard })
     const whiteboardLayer = this.map.getObjectLayer('Whiteboard')
@@ -146,6 +160,14 @@ export default class Game extends Phaser.Scene {
     )
 
     this.physics.add.overlap(
+      this.playerSelector,
+      [voiceChatAreas,],
+      this.handleVoiceChatAreaOverlap,
+      undefined,
+      this
+    )
+
+    this.physics.add.overlap(
       this.myPlayer,
       this.otherPlayers,
       this.handlePlayersOverlap,
@@ -179,6 +201,31 @@ export default class Game extends Phaser.Scene {
     // set selected item and set up new dialog
     playerSelector.selectedItem = selectionItem
     selectionItem.onOverlapDialog()
+  }
+
+  private handleVoiceChatAreaOverlap(playerSelector, selectionItem) {
+    const currentItem = playerSelector.selectedItem as VoiceChatArea
+    // currentItem is undefined if nothing was perviously selected
+    if (currentItem) {
+      // if the selection has not changed, do nothing
+      if (currentItem === selectionItem || currentItem.depth >= selectionItem.depth) {
+        // よくわからんので無効化
+        // return
+      }
+      // if selection changes, clear pervious dialog
+      if (this.myPlayer.playerBehavior !== PlayerBehavior.SITTING) currentItem.clearDialogBox()
+    }
+
+    // set selected item and set up new dialog
+    playerSelector.selectedItem = selectionItem
+    selectionItem.onEnteredVoiceChatArea(this.myPlayer)
+    selectionItem.makeCall(this.myPlayer, this.otherPlayerMap, this.network?.webRTC, this.network)
+    selectionItem.onOverlapDialog()
+    this.isInVoiceChatArea = true
+
+    if (currentItem) {
+      this.lastVoiceChatAreaId = currentItem.id!;
+    }
   }
 
   private addObjectFromTiled(
@@ -246,7 +293,7 @@ export default class Game extends Phaser.Scene {
   }
 
   private handlePlayersOverlap(myPlayer, otherPlayer) {
-    otherPlayer.makeCall(myPlayer, this.network?.webRTC)
+    // otherPlayer.makeCall(myPlayer, this.network?.webRTC)
   }
 
   private handleItemUserAdded(playerId: string, itemId: string, itemType: ItemType) {
@@ -256,6 +303,9 @@ export default class Game extends Phaser.Scene {
     } else if (itemType === ItemType.WHITEBOARD) {
       const whiteboard = this.whiteboardMap.get(itemId)
       whiteboard?.addCurrentUser(playerId)
+    } else if (itemType === ItemType.VOICECHATAREA) {
+      const voiceChatArea = this.voiceChatAreaMap.get(itemId)
+      voiceChatArea?.addCurrentUser(playerId)
     }
   }
 
@@ -266,6 +316,9 @@ export default class Game extends Phaser.Scene {
     } else if (itemType === ItemType.WHITEBOARD) {
       const whiteboard = this.whiteboardMap.get(itemId)
       whiteboard?.removeCurrentUser(playerId)
+    } else if (itemType === ItemType.VOICECHATAREA) {
+      const voiceChatArea = this.voiceChatAreaMap.get(itemId)
+      voiceChatArea?.removeCurrentUser(playerId)
     }
   }
 
@@ -279,5 +332,13 @@ export default class Game extends Phaser.Scene {
       this.playerSelector.update(this.myPlayer, this.cursors)
       this.myPlayer.update(this.playerSelector, this.cursors, this.keyE, this.keyR, this.network)
     }
+
+    // 各VoiceChatAreaにplayerがoverlapしているか判定
+    if (!this.isInVoiceChatArea) {
+      // ↑でoverlapしていないplayerを，VoiceChatAreaからremove
+      this.network.leaveVoiceChatArea(this.lastVoiceChatAreaId)
+    }
+
+    this.isInVoiceChatArea = false
   }
 }
