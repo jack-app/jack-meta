@@ -12,6 +12,8 @@ import Chat from './components/Chat'
 import HelperButtonGroup from './components/HelperButtonGroup'
 import MobileVirtualJoystick from './components/MobileVirtualJoystick'
 
+import JMRoomSelectionDialog from "./components/JMRoomSelectionDialog"
+
 const Backdrop = styled.div`
   position: absolute;
   height: 100%;
@@ -49,7 +51,9 @@ function App() {
     ui = <LoginDialog />
   } else {
     /* Render RoomSelectionDialog if yet selected a room. */
-    ui = <RoomSelectionDialog />
+    // ui = <RoomSelectionDialog />
+    ui = <JMRoomSelectionDialog />
+    // ui = <LoginDialog />
   }
 
   return (
